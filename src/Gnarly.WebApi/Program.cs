@@ -19,9 +19,9 @@ internal class Program
             app.UseSwaggerUI();
         }
 
-        app.MapGet("/", (ITestService service) =>
+        app.MapGet("/", async (ITestService service) =>
         {
-            service.SendMessageAsync();
+            await service.SendMessageAsync();
             return Results.Ok("Hello, Gnarly!");
         });
 

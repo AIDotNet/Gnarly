@@ -1,11 +1,20 @@
 <Project>
 
     <PropertyGroup>
-        <!-- All Microsoft AspNetCore packages -->
+        <Version>0.0.2</Version>
+        <Company>AIDotNet</Company>
+        <Authors>Token</Authors>
+        <Description>自动依赖注入，利用源生成器实现自动依赖注入，并且不使用反射进行实现功能。</Description>
+        <PackageProjectUrl>https://github.com/AIDotNet/Gnarly</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/AIDotNet/Gnarly</RepositoryUrl>
+        <PackageLicenseUrl>https://github.com/AIDotNet/Gnarly/blob/main/LICENSE</PackageLicenseUrl><!-- Do not include the generator as a lib dependency -->
+        <RepositoryType>git</RepositoryType>
+        
         <MicrosoftAspNetCorePackageVersion Condition="'$(TargetFramework)' == 'net8.0'">8.0.0</MicrosoftAspNetCorePackageVersion>
         <MicrosoftAspNetCorePackageVersion Condition="'$(TargetFramework)' == 'net7.0'">7.0.0</MicrosoftAspNetCorePackageVersion>
         <MicrosoftAspNetCorePackageVersion Condition="'$(TargetFramework)' == 'net6.0'">6.0.0</MicrosoftAspNetCorePackageVersion>
-
+        
     </PropertyGroup>
 
 </Project>
