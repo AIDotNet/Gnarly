@@ -1,15 +1,15 @@
+using Test;
+
 internal class Program
 {
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
-
-        builder.Services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddAutoGnarly();
+        
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -21,7 +21,7 @@ internal class Program
 
         app.UseAuthorization();
 
-        app.MapControllers();
+        app.MapGet("/", (ITestService service) => "Hello World!");
 
         app.Run();
     }
