@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Gnarly;
 
@@ -15,45 +13,8 @@ public class ScanService
     private static INamedTypeSymbol iSingletonDependencySymbol;
     private static INamedTypeSymbol iTransientDependencySymbol;
 
-    /// <summary>
-    /// 扫描程序集中的所有类，找到实现了<see cref="IScopeDependency"/>、<see cref="ISingletonDependency"/>、<see cref="ITransientDependency"/>接口的类ConditionalExpressionSyntax conditionalExpression;
-    /// </summary>
-    /// <param name="compilation"></param>
-    /// <returns></returns>
-    public static IEnumerable<(int type, INamedTypeSymbol namedTypeSymbol)> ScanForDependencyTypes(Compilation compilation)
-    {
-        iScopeDependencySymbol ??= compilation.GetTypeByMetadataName("Gnarly.Data.IScopeDependency");
-        iSingletonDependencySymbol ??= compilation.GetTypeByMetadataName("Gnarly.Data.ISingletonDependency");
-        iTransientDependencySymbol ??= compilation.GetTypeByMetadataName("Gnarly.Data.ITransientDependency");
-
-        foreach (var syntaxTree in compilation.SyntaxTrees)
-        {
-            var semanticModel = compilation.GetSemanticModel(syntaxTree);
-            var root = syntaxTree.GetRoot();
-
-            var classes = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
-
-            foreach (var @class in classes)
-            {
-                if (semanticModel.GetDeclaredSymbol(@class) is INamedTypeSymbol symbol)
-                {
-                    if (symbol.AllInterfaces.Contains(iScopeDependencySymbol))
-                    {
-                        yield return (1, symbol);
-                    }
-                    else if (symbol.AllInterfaces.Contains(iSingletonDependencySymbol))
-                    {
-                        yield return (2, symbol);
-                    }
-                    else if (symbol.AllInterfaces.Contains(iTransientDependencySymbol))
-                    {
-                        yield return (3, symbol);
-                    }
-                }
-            }
-        }
-    }
-    public static void ScanAndCollect(Compilation compilationContext, List<string> scopeMethods, List<string> singletonMethods, List<string> transientMethods)
+    public static void ScanAndCollect(Compilation compilationContext, List<string> scopeMethods,
+        List<string> singletonMethods, List<string> transientMethods)
     {
         var visitedAssemblies = new HashSet<IAssemblySymbol>(SymbolEqualityComparer.Default);
 
@@ -63,7 +24,8 @@ public class ScanService
 
         void ScanAssembly(IAssemblySymbol assemblySymbol)
         {
-            if (visitedAssemblies.Contains(assemblySymbol) || assemblySymbol.Name.StartsWith("Microsoft") || assemblySymbol.Name.StartsWith("System"))
+            if (visitedAssemblies.Contains(assemblySymbol) || assemblySymbol.Name.StartsWith("Microsoft") ||
+                assemblySymbol.Name.StartsWith("System"))
             {
                 return;
             }
@@ -97,7 +59,7 @@ public class ScanService
 
             if (registrationAttribute != null &&
                 registrationAttribute.ConstructorArguments.FirstOrDefault().Value as INamedTypeSymbol is
-                { } registrationType && registrationType.TypeKind == TypeKind.Interface)
+                    { } registrationType && registrationType.TypeKind == TypeKind.Interface)
             {
                 switch (type)
                 {

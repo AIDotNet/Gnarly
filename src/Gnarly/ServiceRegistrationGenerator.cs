@@ -32,7 +32,7 @@ namespace Gnarly
             var transientRegistrations = string.Join("\n", transientMethods.Select(m => $"services.AddTransient<{m}>();"));
 
             // 生成源代码
-            string source = $@"// 这是由SourceGenerator自动生成的代码
+            string source = $@"// Gnarly自动生成的源代码，请勿手动修改
 using System;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -45,9 +45,9 @@ namespace System
         /// </summary>
         public static IServiceCollection AddAutoGnarly(this IServiceCollection services)
         {{
-            {scopeRegistrations}
-            {singletonRegistrations}
-            {transientRegistrations}
+            {scopeRegistrations.Trim()}
+            {singletonRegistrations.Trim()}
+            {transientRegistrations.Trim()}
             return services;
         }}
     }}

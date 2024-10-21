@@ -14,7 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Gnarly\Gnarly.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\Gnarly.Data\Gnarly.Data.csproj" />
-    <ProjectReference Include="..\Test\Test.csproj" />
+    <ProjectReference Include="..\Gnarly.Application\Gnarly.Application.csproj" />
   </ItemGroup>
 
 
