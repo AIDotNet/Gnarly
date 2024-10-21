@@ -2,8 +2,7 @@
 
 namespace Gnarly.WebApi;
 
-[Registration(typeof(ITestService))]
-public class Test : ITestService, ISingletonDependency
+public class Test : ITest, ISingletonDependency
 {
 
 }

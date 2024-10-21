@@ -1,6 +1,6 @@
 ﻿namespace Gnarly.WebApi
 {
-    public interface ITestService
+    public interface ITest
     {
 
     }

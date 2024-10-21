@@ -14,8 +14,8 @@ namespace Gnarly
     {
         public void Execute(GeneratorExecutionContext context)
         {
-            var compilation = context.Compilation;
 
+            var compilation = context.Compilation;
 
             var scopeMethods = new List<string>();
             var singletonMethods = new List<string>();
@@ -44,16 +44,18 @@ namespace Gnarly
                 // namedTypeSymbol中存在相同名称的接口I 
                 else if (namedTypeSymbol.AllInterfaces.Any(i => i.Name == $"I{namedTypeSymbol.Name}"))
                 {
+                    var namedTypeSymbolInterface = namedTypeSymbol.AllInterfaces.First(i => i.Name.ToLower() == $"I{namedTypeSymbol.Name}".ToLower());
+
                     switch (type)
                     {
                         case 1:
-                            scopeMethods.Add($"I{namedTypeSymbol},{namedTypeSymbol}");
+                            scopeMethods.Add($"{namedTypeSymbolInterface},{namedTypeSymbol}");
                             break;
                         case 2:
-                            singletonMethods.Add($"I{namedTypeSymbol},{namedTypeSymbol}");
+                            singletonMethods.Add($"{namedTypeSymbolInterface},{namedTypeSymbol}");
                             break;
                         case 3:
-                            transientMethods.Add($"I{namedTypeSymbol},{namedTypeSymbol}");
+                            transientMethods.Add($"{namedTypeSymbolInterface},{namedTypeSymbol}");
                             break;
                     }
                 }
