@@ -19,9 +19,11 @@ internal class Program
             app.UseSwaggerUI();
         }
 
-        app.UseAuthorization();
-
-        app.MapGet("/", (ITestService service) => "Hello World!");
+        app.MapGet("/", (ITestService service) =>
+        {
+            service.SendMessageAsync();
+            return Results.Ok("Hello, Gnarly!");
+        });
 
         app.Run();
     }
