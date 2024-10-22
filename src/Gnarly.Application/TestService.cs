@@ -8,7 +8,7 @@ namespace Test
     {
         public async Task SendMessageAsync()
         {
-            Console.WriteLine("Hello, Gnarly!");
+            Console.WriteLine("Hello, Gnarly.Analyzers!");
             
             await Task.CompletedTask;
         }

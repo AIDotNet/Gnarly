@@ -5,14 +5,25 @@
         <Company>AIDotNet</Company>
         <Authors>Token</Authors>
         <Description>自动依赖注入，利用源生成器实现自动依赖注入，并且不使用反射进行实现功能。</Description>
-        <PackageProjectUrl>https://github.com/AIDotNet/Gnarly</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/AIDotNet/Gnarly.Analyzers</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <RepositoryUrl>https://github.com/AIDotNet/Gnarly</RepositoryUrl>
+        <RepositoryUrl>https://github.com/AIDotNet/Gnarly.Analyzers</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <MicrosoftAspNetCorePackageVersion Condition="'$(TargetFramework)' == 'net8.0'">8.0.0</MicrosoftAspNetCorePackageVersion>
         <MicrosoftAspNetCorePackageVersion Condition="'$(TargetFramework)' == 'net7.0'">7.0.0</MicrosoftAspNetCorePackageVersion>
         <MicrosoftAspNetCorePackageVersion Condition="'$(TargetFramework)' == 'net6.0'">6.0.0</MicrosoftAspNetCorePackageVersion>
-        
+
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <UseArtifactsOutput>true</UseArtifactsOutput>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <IncludeSymbols>True</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    </PropertyGroup>
+    
 </Project>

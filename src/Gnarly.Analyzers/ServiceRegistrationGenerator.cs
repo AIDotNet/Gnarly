@@ -7,9 +7,8 @@ using System.Text;
 
 namespace Gnarly
 {
-    [Generator]
-    [DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
-    public class ServiceRegistrationGenerator : IIncrementalGenerator
+    [Generator(LanguageNames.CSharp)]
+    public partial class ServiceRegistrationGenerator : IIncrementalGenerator
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {

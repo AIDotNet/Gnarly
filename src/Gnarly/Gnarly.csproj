@@ -1,25 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <LangVersion>Latest</LangVersion>
-        <RootNamespace>Gnarly</RootNamespace>
-        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <TargetFrameworks>netstandard2.1;net6.0;net8.0</TargetFrameworks>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild><!-- Generates a package at build -->
-        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <LangVersion>12</LangVersion>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" PrivateAssets="all" />
-        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" PrivateAssets="all" />
+        <ProjectReference Include="..\Gnarly.Analyzers\Gnarly.Analyzers.csproj" >
+            <OutputItemType>Analyzer</OutputItemType>
+            <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+        </ProjectReference>
+        <None Include="..\Gnarly.Analyzers\bin\$(Configuration)\netstandard2.0\Gnarly.Analyzers.dll" PackagePath="analyzers\dotnet\roslyn4.3\cs" Pack="true" Visible="false"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Gnarly.Data\Gnarly.Data.csproj" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="$(MicrosoftAspNetCorePackageVersion)" />
     </ItemGroup>
 
-	<ItemGroup>
-		<None Include="$(OutputPath)\..\..\Gnarly\$(Configuration)\**" PackagePath="analyzers\dotnet\cs" Pack="true" Visible="false" />
-	</ItemGroup>
+    <ItemGroup>
+      <Folder Include="Options\" />
+    </ItemGroup>
+
 </Project>
