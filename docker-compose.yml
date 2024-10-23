@@ -1,0 +1,6 @@
+﻿services:
+  gnarly.webapi:
+    image: gnarly.webapi
+    build:
+      context: .
+      dockerfile: src/Gnarly.WebApi/Dockerfile

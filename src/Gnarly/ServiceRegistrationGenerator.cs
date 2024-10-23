@@ -1,14 +1,13 @@
-﻿using Microsoft.CodeAnalysis;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.CodeAnalysis.Text;
 using System.Text;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Gnarly
 {
     [Generator(LanguageNames.CSharp)]
-    public partial class ServiceRegistrationGenerator : IIncrementalGenerator
+    public class ServiceRegistrationGenerator : IIncrementalGenerator
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
@@ -27,8 +26,10 @@ namespace Gnarly
             ScanService.ScanAndCollect(compilation, scopeMethods, singletonMethods, transientMethods);
 
             var scopeRegistrations = string.Join("\n", scopeMethods.Select(m => $"services.AddScoped<{m}>();"));
-            var singletonRegistrations = string.Join("\n", singletonMethods.Select(m => $"services.AddSingleton<{m}>();"));
-            var transientRegistrations = string.Join("\n", transientMethods.Select(m => $"services.AddTransient<{m}>();"));
+            var singletonRegistrations =
+                string.Join("\n", singletonMethods.Select(m => $"services.AddSingleton<{m}>();"));
+            var transientRegistrations =
+                string.Join("\n", transientMethods.Select(m => $"services.AddTransient<{m}>();"));
 
             // 生成源代码
             string source = $@"// Gnarly自动生成的源代码，请勿手动修改

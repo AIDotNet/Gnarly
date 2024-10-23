@@ -7,11 +7,11 @@ namespace Gnarly;
 /// <summary>
 /// 扫描
 /// </summary>
-public class ScanService
+public static class ScanService
 {
-    private static INamedTypeSymbol iScopeDependencySymbol;
-    private static INamedTypeSymbol iSingletonDependencySymbol;
-    private static INamedTypeSymbol iTransientDependencySymbol;
+    private static INamedTypeSymbol? iScopeDependencySymbol;
+    private static INamedTypeSymbol? iSingletonDependencySymbol;
+    private static INamedTypeSymbol? iTransientDependencySymbol;
 
     public static void ScanAndCollect(Compilation compilationContext, List<string> scopeMethods,
         List<string> singletonMethods, List<string> transientMethods)
@@ -57,9 +57,10 @@ public class ScanService
                 type = 3;
             }
 
-            if (registrationAttribute != null &&
-                registrationAttribute.ConstructorArguments.FirstOrDefault().Value as INamedTypeSymbol is
-                    { } registrationType && registrationType.TypeKind == TypeKind.Interface)
+            if ((registrationAttribute?.ConstructorArguments.FirstOrDefault().Value as INamedTypeSymbol) is
+                {
+                    TypeKind: TypeKind.Interface
+                } registrationType)
             {
                 switch (type)
                 {
@@ -122,12 +123,22 @@ public class ScanService
 
         ScanAssembly(compilationContext.Assembly);
 
-        foreach (var item in visitedAssemblies)
+        void ScanNamespace(INamespaceSymbol namespaceSymbol)
         {
-            foreach (var typeSymbol in item.GlobalNamespace.GetNamespaceMembers().SelectMany(ns => ns.GetTypeMembers()))
+            foreach (var typeSymbol in namespaceSymbol.GetTypeMembers())
             {
                 ScanType(typeSymbol);
             }
+
+            foreach (var nestedNamespace in namespaceSymbol.GetNamespaceMembers())
+            {
+                ScanNamespace(nestedNamespace);
+            }
+        }
+
+        foreach (var item in visitedAssemblies)
+        {
+            ScanNamespace(item.GlobalNamespace);
         }
     }
 }

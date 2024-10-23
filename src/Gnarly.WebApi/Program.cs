@@ -22,7 +22,7 @@ internal class Program
         app.MapGet("/", async (ITestService service) =>
         {
             await service.SendMessageAsync();
-            return Results.Ok("Hello, Gnarly.Analyzers!");
+            return Results.Ok("Hello, Gnarly!");
         });
 
         app.Run();
