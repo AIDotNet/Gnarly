@@ -2,7 +2,6 @@
 
 基于源生成器实现的自动依赖注入，只需要继承接口即可实现自动依赖注入，并且不需要反射，自动生成代码，只需要先引用项目，然后添加以下代码
 
-<<<<<<< HEAD
 ## 简单入门
 
 安装NuGet包在我们的Api层
@@ -11,10 +10,6 @@
 
 ```shell
 dotnet add package Gnarly 
-=======
-```csharp
-builder.Services.AddAutoGnarly();
->>>>>>> origin/main
 ```
 
 然后我们只需要在需要注入的项目中在安装NuGet包
