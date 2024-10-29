@@ -25,11 +25,11 @@ namespace Gnarly
             // 扫描当前编译单元和所有引用的程序集
             ScanService.ScanAndCollect(compilation, scopeMethods, singletonMethods, transientMethods);
 
-            var scopeRegistrations = string.Join("\n", scopeMethods.Select(m => $"services.AddScoped<{m}>();"));
+            var scopeRegistrations = string.Join("            ", scopeMethods.Select(m => $"services.AddScoped<{m}>();"));
             var singletonRegistrations =
-                string.Join("\n", singletonMethods.Select(m => $"services.AddSingleton<{m}>();"));
+                string.Join("            ", singletonMethods.Select(m => $"services.AddSingleton<{m}>();"));
             var transientRegistrations =
-                string.Join("\n", transientMethods.Select(m => $"services.AddTransient<{m}>();"));
+                string.Join("            ", transientMethods.Select(m => $"services.AddTransient<{m}>();"));
 
             // 生成源代码
             string source = $@"// Gnarly自动生成的源代码，请勿手动修改
@@ -45,9 +45,11 @@ namespace System
         /// </summary>
         public static IServiceCollection AddAutoGnarly(this IServiceCollection services)
         {{
-            {scopeRegistrations.Trim()}
-            {singletonRegistrations.Trim()}
-            {transientRegistrations.Trim()}
+            {scopeRegistrations}
+
+            {singletonRegistrations}
+
+            {transientRegistrations}
             return services;
         }}
     }}
