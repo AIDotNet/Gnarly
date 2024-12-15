@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
@@ -22,7 +23,6 @@ namespace Gnarly
             var singletonMethods = new List<string>();
             var transientMethods = new List<string>();
 
-            // 扫描当前编译单元和所有引用的程序集
             ScanService.ScanAndCollect(compilation, scopeMethods, singletonMethods, transientMethods);
 
             var scopeRegistrations = string.Join("\n            ", scopeMethods.Select(m => $"services.AddScoped<{m}>();"));
@@ -36,9 +36,9 @@ namespace Gnarly
 using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace System
+namespace {compilation.AssemblyName}
 {{
-    public static class GnarlyExtensions
+    public static class {compilation.AssemblyName?.Replace(".","")}Extensions
     {{
         /// <summary>
         /// SourceGenerator自动注入服务
@@ -57,7 +57,7 @@ namespace System
 ";
 
             // 添加生成的源代码到编译单元
-            context.AddSource($"GnarlyExtensions.g.cs", SourceText.From(source, Encoding.UTF8));
+            context.AddSource($"{compilation.AssemblyName?.Replace(".", "")}Extensions.g.cs", SourceText.From(source, Encoding.UTF8));
         }
 
         private string GetDebuggerDisplay()

@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnarly.Application", "src\Gnarly.Application\Gnarly.Application.csproj", "{B241F5DD-1A66-4E36-9B98-C7D4A5D5A1A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnarly.Test", "src\Gnarly.Test\Gnarly.Test.csproj", "{6D10270A-6309-430B-8902-582DBA9BF8BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{B241F5DD-1A66-4E36-9B98-C7D4A5D5A1A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B241F5DD-1A66-4E36-9B98-C7D4A5D5A1A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B241F5DD-1A66-4E36-9B98-C7D4A5D5A1A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D10270A-6309-430B-8902-582DBA9BF8BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D10270A-6309-430B-8902-582DBA9BF8BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D10270A-6309-430B-8902-582DBA9BF8BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D10270A-6309-430B-8902-582DBA9BF8BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{28EE6E90-E647-4EAA-98EB-6599EBC5CE69} = {EAEBB030-5D94-4D76-98DC-C947ECE0F269}
 		{30E211CA-1BED-425B-8035-BEBBD47F4EE7} = {EAEBB030-5D94-4D76-98DC-C947ECE0F269}
 		{B241F5DD-1A66-4E36-9B98-C7D4A5D5A1A8} = {EAEBB030-5D94-4D76-98DC-C947ECE0F269}
+		{6D10270A-6309-430B-8902-582DBA9BF8BF} = {EAEBB030-5D94-4D76-98DC-C947ECE0F269}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {271DCA1A-7B6B-431E-A491-8C1A7B8971D9}
